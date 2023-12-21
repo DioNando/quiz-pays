@@ -19,6 +19,7 @@ class PartieResource extends JsonResource
             'pseudo' => $this->pseudo,
             'score' => $this->score,
             'date' => date_format($this->created_at, "d-m-Y"),
+            'time' => date_format($this->created_at, "H:m"),
         ];
     }
 }

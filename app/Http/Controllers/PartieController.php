@@ -15,8 +15,8 @@ class PartieController extends Controller
      */
     public function index()
     {
-        $data = Partie::orderBy('score', 'desc')->limit(20)->get();
-        return PartieResource::collection($data);
+        $data = Partie::orderBy('score', 'desc')->limit(5)->get();
+        return $data;
     }
 
     /**

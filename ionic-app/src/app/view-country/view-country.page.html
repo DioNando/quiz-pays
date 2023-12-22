@@ -1,0 +1,126 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [text]="getBackButtonText()"
+        defaultHref="/"
+      ></ion-back-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="country">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" color="primary" *ngIf="country.name.common"
+        >{{ country.name.common }}</ion-title
+      >
+    </ion-toolbar>
+  </ion-header>
+
+
+
+  <ion-card *ngIf="loaded">
+    <img [src]="country.flags.svg" alt="{{ country.name.common }} Flag" />
+    <ion-card-header>
+      <ion-card-subtitle class="ion-text-center"
+        >{{ country.name.official }}</ion-card-subtitle
+      >
+    </ion-card-header>
+  </ion-card>
+
+
+  <ion-card *ngIf="loaded">
+    <ion-card-header translucent="true">
+      <ion-label class="ion-text-right ion-text-large" color="primary"
+        ><h1><b>General Informations</b></h1></ion-label
+      >
+    </ion-card-header>
+    <ion-list lines="none">
+      <ion-item *ngIf="country.name.common">
+        <ion-grid>
+          <ion-row class="ion-align-items-start">
+            <ion-col class="ion-text-left" size="auto">
+              <ion-note>Name</ion-note>
+            </ion-col>
+            <ion-col>
+              <ion-label class="ion-text-right"
+                >{{ country.name.common }}</ion-label
+              >
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item *ngIf="country.name.official">
+        <ion-grid>
+          <ion-row class="ion-align-items-start">
+            <ion-col class="ion-text-left" size="auto">
+              <ion-note>Official</ion-note>
+            </ion-col>
+            <ion-col>
+              <ion-label class="ion-text-right"
+                >{{ country.name.official }}</ion-label
+              >
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item *ngIf="country.capital">
+        <ion-grid>
+          <ion-row class="ion-align-items-start">
+            <ion-col class="ion-text-left" size="auto">
+              <ion-note>Capital</ion-note>
+            </ion-col>
+            <ion-col>
+              <ion-label class="ion-text-right"
+                >{{ country.capital }}</ion-label
+              >
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item *ngIf="country.continents">
+        <ion-grid>
+          <ion-row class="ion-align-items-start">
+            <ion-col class="ion-text-left" size="auto">
+              <ion-note>Continents</ion-note>
+            </ion-col>
+            <ion-col>
+              <ion-label class="ion-text-right"
+                >{{ country.continents }}</ion-label
+              >
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item *ngIf="country.region">
+        <ion-grid>
+          <ion-row class="ion-align-items-start">
+            <ion-col class="ion-text-left" size="auto">
+              <ion-note>Region</ion-note>
+            </ion-col>
+            <ion-col>
+              <ion-label class="ion-text-right"
+                >{{ country.region }}</ion-label
+              >
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+      <ion-item *ngIf="country.population">
+        <ion-grid>
+          <ion-row class="ion-align-items-start">
+            <ion-col class="ion-text-left" size="auto">
+              <ion-note>Population</ion-note>
+            </ion-col>
+            <ion-col>
+              <ion-label class="ion-text-right"
+                >{{ country.population | number }}</ion-label
+              >
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

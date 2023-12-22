@@ -1,0 +1,56 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title> Score </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" color="primary">Score</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card>
+    <ion-card-header>
+      <ion-card-title class="title-score"
+        ><div>Leaderboard</div>
+
+        <ion-button shape="round" (click)="refreshData()"><ion-icon name="refresh"></ion-icon></ion-button>
+      </ion-card-title>
+    </ion-card-header>
+    <ion-card *ngFor="let partie of parties; let i = index">
+      <ion-grid>
+        <ion-row class="ion-align-items-center ion-justify-content-between">
+          <ion-col>
+            <ion-card-title color="primary">{{partie.score}}</ion-card-title>
+            <ion-card-subtitle>{{partie.pseudo}}</ion-card-subtitle>
+          </ion-col>
+          <ion-col size="auto" *ngIf="i === 0">
+            <ion-icon name="trophy" size="large" class="trophy-gold"></ion-icon>
+          </ion-col>
+          <ion-col size="auto" *ngIf="i === 1">
+            <ion-icon
+              name="trophy"
+              size="large"
+              class="trophy-silver"
+            ></ion-icon>
+          </ion-col>
+          <ion-col size="auto" *ngIf="i === 2">
+            <ion-icon
+              name="trophy"
+              size="large"
+              class="trophy-bronze"
+            ></ion-icon>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+  </ion-card>
+</ion-content>
+
+<!-- <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+  <ion-fab-button (click)="refreshData()" color="tertiary">
+    <ion-icon name="flash"></ion-icon>
+  </ion-fab-button>
+</ion-fab> -->

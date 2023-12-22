@@ -1,0 +1,58 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="primary">
+    <ion-title> Sandbox </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large" color="primary">Sandbox</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- <ion-searchbar></ion-searchbar> -->
+
+  <ion-card>
+    <!-- <img
+      alt="Silhouette of mountains"
+      src="https://images.unsplash.com/photo-1545121436-87364761152c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    /> -->
+    <ion-card-header>
+      <ion-card-title color="primary" *ngIf="oneEmoji"
+        >{{ oneEmoji.unicodeName }}</ion-card-title
+      >
+      <ion-card-subtitle> {{oneEmoji?.group}} </ion-card-subtitle>
+    </ion-card-header>
+  </ion-card>
+
+  <ion-card color="tertiary">
+    <ion-card-header>
+      <ion-card-title class="title-emoji"
+        ><div>Emojis</div>
+        <div>{{oneEmoji?.character }}</div></ion-card-title
+      >
+    </ion-card-header>
+    <ion-grid>
+      <ion-row>
+        <ion-col
+          size="4"
+          *ngFor="let emoji of selectedEmojis"
+          (click)="piocherEmoji()"
+        >
+          <ion-card class="ion-no-margin ion-activatable">
+            <ion-ripple-effect></ion-ripple-effect>
+            <ion-card-content class="emoji-character"
+              ><div>{{ emoji.character}}</div>
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-card-content>
+      <ion-button shape="round" color="danger" (click)="deleteEmoji()"
+        ><ion-icon name="trash"></ion-icon
+      ></ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

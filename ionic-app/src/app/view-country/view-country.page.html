@@ -12,23 +12,20 @@
 <ion-content [fullscreen]="true" *ngIf="country">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large" color="primary" *ngIf="country.name.common"
+      <ion-title size="large" *ngIf="country.name.common"
         >{{ country.name.common }}</ion-title
       >
     </ion-toolbar>
   </ion-header>
 
-
-
   <ion-card *ngIf="loaded">
     <img [src]="country.flags.svg" alt="{{ country.name.common }} Flag" />
     <ion-card-header>
-      <ion-card-subtitle class="ion-text-center"
+      <ion-card-subtitle color="primary" class="ion-text-center"
         >{{ country.name.official }}</ion-card-subtitle
       >
     </ion-card-header>
   </ion-card>
-
 
   <ion-card *ngIf="loaded">
     <ion-card-header translucent="true">
@@ -100,9 +97,7 @@
               <ion-note>Region</ion-note>
             </ion-col>
             <ion-col>
-              <ion-label class="ion-text-right"
-                >{{ country.region }}</ion-label
-              >
+              <ion-label class="ion-text-right">{{ country.region }}</ion-label>
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -123,4 +118,11 @@
       </ion-item>
     </ion-list>
   </ion-card>
+
+  <ion-card *ngIf="country.flags.alt">
+    <ion-card-header>
+      <ion-card-subtitle color="primary">Description of the flag</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>{{ country.flags.alt}}</ion-card-content></ion-card
+  >
 </ion-content>

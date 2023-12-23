@@ -19,10 +19,7 @@ export class Tab2Page implements OnInit {
     this.emojiService.getData().subscribe((res) => {
       if (Array.isArray(res)) {
         this.emojis = res;
-
-        this.oneEmoji = this.getRandomElement(this.emojis);
         this.selectedEmojis = this.getRandomElements(this.emojis, 3);
-
         this.loaded = !this.loaded;
       } else {
         console.error('Les données ne sont pas un tableau.');
@@ -30,8 +27,8 @@ export class Tab2Page implements OnInit {
     });
   }
 
-  capitalizeName(unicodeName: string): string {
-    const mots = unicodeName.split(' ');
+  capitalizeName(name: string): string {
+    const mots = name.split(' ');
     const motsFormattes = mots.map(
       (mot) => mot.charAt(0).toUpperCase() + mot.slice(1)
     );
@@ -40,10 +37,14 @@ export class Tab2Page implements OnInit {
     return resultat;
   }
 
+  separateName(name: string): string {
+    const mots = name.split('-');
+    return mots.join(' ');
+  }
+
   piocherEmoji(): void {
     // Sélectionnez un emoji au hasard
     const emojiSelectionne = this.getRandomElement(this.emojis);
-    this.oneEmoji = this.getRandomElement(this.emojis);
 
     // Ajoutez l'emoji sélectionné à la liste des emojis sélectionnés
     this.selectedEmojis.push(emojiSelectionne);

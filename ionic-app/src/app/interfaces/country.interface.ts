@@ -5,8 +5,8 @@ export interface CountryInterface {
   cca3: string;
   capital: string;
   region: string;
-  timezones: string;
-  flags: SVG;
+  timezones?: string[];
+  flags: Flags;
   population: number;
   continents: string;
   maps: Maps;
@@ -17,11 +17,35 @@ interface Name {
   official: string;
 }
 
-interface SVG {
+interface Flags {
   svg: string;
+  alt?: string;
 }
 
 interface Maps {
   googleMaps: string;
   openStreetMaps: string;
 }
+
+export const exampleCountry: CountryInterface = {
+  name: {
+    common: 'United States',
+    official: 'United States of America',
+  },
+  cca2: 'US',
+  ccn3: '840',
+  cca3: 'USA',
+  capital: 'Washington, D.C.',
+  region: 'Americas',
+  timezones: ['UTC-12:00'],
+  flags: {
+    svg: 'https://flagcdn.com/us.svg',
+  },
+  population: 329484123,
+  continents: 'North America',
+  maps: {
+    googleMaps: 'googleMaps": "https://goo.gl/maps/e8M246zY4BSjkjAv6',
+    openStreetMaps:
+      'https://www.openstreetmap.org/relation/148838#map=2/20.6/-85.8',
+  },
+};

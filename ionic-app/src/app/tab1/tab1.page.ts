@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CountryService } from '../services/country.service';
 import { CountryInterface } from '../interfaces/country.interface';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-tab1',

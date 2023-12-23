@@ -7,7 +7,7 @@
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large" color="primary">All Countries</ion-title>
+      <ion-title size="large">All Countries</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -23,7 +23,7 @@
         <ion-card class="ion-no-margin ion-activatable" [routerLink]="['/view-country/' + country.ccn3 + '/' + country.name.common]">
           <ion-ripple-effect></ion-ripple-effect>
           <ion-card-header>
-            <ion-card-subtitle>{{ country.name.common }}</ion-card-subtitle>
+            <ion-card-subtitle color="primary">{{ country.name.common }}</ion-card-subtitle>
           </ion-card-header>
         </ion-card>
       </ion-col>

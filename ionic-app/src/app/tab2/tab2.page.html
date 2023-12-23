@@ -1,37 +1,33 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title> Playground </ion-title>
+    <ion-title> Emojis </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large" color="primary">Playground</ion-title>
+      <ion-title size="large">Emojis</ion-title>
     </ion-toolbar>
   </ion-header>
 
   <!-- <ion-searchbar></ion-searchbar> -->
 
   <ion-card>
-    <!-- <img
-      alt="Silhouette of mountains"
-      src="https://images.unsplash.com/photo-1545121436-87364761152c?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-    /> -->
     <ion-card-header>
-      <ion-card-title color="primary" *ngIf="oneEmoji"
-        >{{ capitalizeName(oneEmoji.unicodeName) }}</ion-card-title
+      <ion-card-title color="primary" *ngIf="selectedEmojis.length"
+        >{{ capitalizeName(selectedEmojis[selectedEmojis.length -
+        1].unicodeName) }}</ion-card-title
       >
-      <ion-card-subtitle> {{oneEmoji?.group}} </ion-card-subtitle>
     </ion-card-header>
   </ion-card>
 
-  <ion-card color="tertiary">
+  <ion-card>
     <ion-card-header>
-      <ion-card-title class="title-emoji"
-        ><div>Emojis</div>
-        <div>{{oneEmoji?.character }}</div></ion-card-title
-      >
+      <div class="title-emoji" *ngIf="selectedEmojis.length">
+        <ion-note>{{ separateName(selectedEmojis[selectedEmojis.length - 1].group.toUpperCase()) }}</ion-note>
+        <div>{{ selectedEmojis[selectedEmojis.length - 1].character }}</div>
+      </div>
     </ion-card-header>
     <ion-grid>
       <ion-row *ngIf="selectedEmojis.length">
@@ -48,13 +44,15 @@
           </ion-card>
         </ion-col>
       </ion-row>
-      <h3 class="ion-text-center ion-no-margin" *ngIf="!selectedEmojis.length">Empty list</h3>
+      <h3 class="ion-text-center ion-no-margin" *ngIf="!selectedEmojis.length">
+        Empty list
+      </h3>
     </ion-grid>
     <ion-card-content class="emoji-btn">
-      <ion-button shape="round" color="danger" (click)="deleteEmoji()"
+      <ion-button shape="round" color="light" (click)="deleteEmoji()"
         ><ion-icon name="trash"></ion-icon
       ></ion-button>
-      <ion-button shape="round" color="success" (click)="piocherEmoji()"
+      <ion-button shape="round" color="tertiary" (click)="piocherEmoji()"
         ><ion-icon name="happy"></ion-icon
       ></ion-button>
     </ion-card-content>

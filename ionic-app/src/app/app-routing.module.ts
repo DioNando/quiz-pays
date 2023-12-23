@@ -9,7 +9,7 @@ const routes: Routes = [
   {
     path: 'view-country/:id/:name',
     loadChildren: () => import('./view-country/view-country.module').then( m => m.ViewCountryPageModule)
-  }
+  },
 ];
 @NgModule({
   imports: [

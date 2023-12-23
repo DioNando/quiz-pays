@@ -18,7 +18,7 @@ class PartieFactory extends Factory
     {
         return [
             'pseudo' => fake()->userName(),
-            'score' => rand(0,1500),
+            'score' => rand(0,1000),
         ];
     }
 }

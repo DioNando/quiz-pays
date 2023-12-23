@@ -9,7 +9,7 @@ import { PartieInterface } from '../interfaces/partie.interface';
 })
 export class PartieService {
 
-  private apiUrl = 'http://192.168.0.109:8000/api/parties'
+  private apiUrl = 'http://192.168.0.110:8000/api/parties'
 
   constructor(private http: HttpClient) { }
 

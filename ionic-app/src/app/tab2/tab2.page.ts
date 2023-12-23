@@ -5,7 +5,7 @@ import { EmojiInterface } from '../interfaces/emoji.interface';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
-  styleUrls: ['tab2.page.scss']
+  styleUrls: ['tab2.page.scss'],
 })
 export class Tab2Page implements OnInit {
   emojis: EmojiInterface[] = [];
@@ -30,6 +30,16 @@ export class Tab2Page implements OnInit {
     });
   }
 
+  capitalizeName(unicodeName: string): string {
+    const mots = unicodeName.split(' ');
+    const motsFormattes = mots.map(
+      (mot) => mot.charAt(0).toUpperCase() + mot.slice(1)
+    );
+    motsFormattes.shift();
+    const resultat = motsFormattes.join(' ');
+    return resultat;
+  }
+
   piocherEmoji(): void {
     // Sélectionnez un emoji au hasard
     const emojiSelectionne = this.getRandomElement(this.emojis);
@@ -40,9 +50,9 @@ export class Tab2Page implements OnInit {
   }
 
   deleteEmoji(): void {
-    if (this.selectedEmojis.length > 1) {
-      this.selectedEmojis.pop();
-    }
+    // if (this.selectedEmojis.length > 1) {
+    this.selectedEmojis.pop();
+    // }
   }
 
   // Fonction pour sélectionner au hasard n éléments dans un tableau

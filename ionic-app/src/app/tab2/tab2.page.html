@@ -1,13 +1,13 @@
 <ion-header [translucent]="true">
   <ion-toolbar color="primary">
-    <ion-title> Sandbox </ion-title>
+    <ion-title> Playground </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large" color="primary">Sandbox</ion-title>
+      <ion-title size="large" color="primary">Playground</ion-title>
     </ion-toolbar>
   </ion-header>
 
@@ -20,7 +20,7 @@
     /> -->
     <ion-card-header>
       <ion-card-title color="primary" *ngIf="oneEmoji"
-        >{{ oneEmoji.unicodeName }}</ion-card-title
+        >{{ capitalizeName(oneEmoji.unicodeName) }}</ion-card-title
       >
       <ion-card-subtitle> {{oneEmoji?.group}} </ion-card-subtitle>
     </ion-card-header>
@@ -34,7 +34,7 @@
       >
     </ion-card-header>
     <ion-grid>
-      <ion-row>
+      <ion-row *ngIf="selectedEmojis.length">
         <ion-col
           size="4"
           *ngFor="let emoji of selectedEmojis"
@@ -48,10 +48,14 @@
           </ion-card>
         </ion-col>
       </ion-row>
+      <h3 class="ion-text-center ion-no-margin" *ngIf="!selectedEmojis.length">Empty list</h3>
     </ion-grid>
-    <ion-card-content>
+    <ion-card-content class="emoji-btn">
       <ion-button shape="round" color="danger" (click)="deleteEmoji()"
         ><ion-icon name="trash"></ion-icon
+      ></ion-button>
+      <ion-button shape="round" color="success" (click)="piocherEmoji()"
+        ><ion-icon name="happy"></ion-icon
       ></ion-button>
     </ion-card-content>
   </ion-card>

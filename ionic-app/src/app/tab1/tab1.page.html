@@ -15,12 +15,12 @@
   <ion-grid>
     <ion-row *ngFor="let country of countries" class="ion-align-items-center">
       <ion-col size="auto">
-        <ion-avatar [routerLink]="['/view-country/' + country.ccn3 + '/' + country.name.common]">
+        <ion-avatar [routerLink]="'/view-country/' + country.ccn3">
           <img [src]="country.flags.svg" alt="{{ country.name.common }} Flag" />
         </ion-avatar>
       </ion-col>
       <ion-col>
-        <ion-card class="ion-no-margin ion-activatable" [routerLink]="['/view-country/' + country.ccn3 + '/' + country.name.common]">
+        <ion-card class="ion-no-margin ion-activatable" [routerLink]="'/view-country/' + country.ccn3">
           <ion-ripple-effect></ion-ripple-effect>
           <ion-card-header>
             <ion-card-subtitle color="primary">{{ country.name.common }}</ion-card-subtitle>

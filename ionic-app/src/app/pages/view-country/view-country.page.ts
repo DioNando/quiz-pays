@@ -2,8 +2,8 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Platform } from '@ionic/angular';
-import { CountryService } from '../services/country.service';
-import { CountryInterface } from '../interfaces/country.interface';
+import { CountryService } from '../../services/country.service';
+import { CountryInterface } from '../../interfaces/country.interface';
 
 @Component({
   selector: 'app-view-country',
@@ -34,6 +34,6 @@ export class ViewCountryPage implements OnInit {
 
   getBackButtonText() {
     const isIos = this.platform.is('ios');
-    return isIos ? 'Countries' : '';
+    return isIos ? 'Back' : '';
   }
 }

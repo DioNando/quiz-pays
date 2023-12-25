@@ -7,9 +7,17 @@ const routes: Routes = [
     loadChildren: () => import('./tabs/tabs.module').then(m => m.TabsPageModule)
   },
   {
-    path: 'view-country/:id/:name',
-    loadChildren: () => import('./view-country/view-country.module').then( m => m.ViewCountryPageModule)
+    path: 'view-country/:id',
+    loadChildren: () => import('./pages/view-country/view-country.module').then( m => m.ViewCountryPageModule)
   },
+  {
+    path: 'play-quiz',
+    loadChildren: () => import('./pages/play-quiz/play-quiz.module').then( m => m.PlayQuizPageModule)
+  },  {
+    path: 'play-country',
+    loadChildren: () => import('./pages/play-country/play-country.module').then( m => m.PlayCountryPageModule)
+  },
+
 ];
 @NgModule({
   imports: [

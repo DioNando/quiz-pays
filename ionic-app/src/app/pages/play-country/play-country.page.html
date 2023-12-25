@@ -1,0 +1,82 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button
+        [text]="getBackButtonText()"
+        defaultHref="/tabs/tab4"
+      ></ion-back-button>
+    </ion-buttons>
+    <ion-title>Countries</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">Countries</ion-title>
+    </ion-toolbar>
+  </ion-header>
+
+  <ion-card class="card-no-borders">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card
+            (click)="playCapital()"
+            color="tertiary"
+            class="ion-activatable ion-no-margin card-play"
+          >
+            <ion-icon name="map" color="secondary"></ion-icon>
+            <div>Capitals</div>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card
+            (click)="playFlag()"
+            color="tertiary"
+            class="ion-activatable ion-no-margin card-play"
+          >
+            <ion-icon name="flag" color="secondary"></ion-icon>
+            <div>Flags</div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <div *ngIf="stateCapital">
+    <ion-card
+      *ngFor="let country of dataCountries"
+      [routerLink]="'/view-country/' + country.ccn3"
+    >
+      <ion-list lines="none" class="animation-opacity">
+        <ion-item
+          ><h4><b>{{country.country}}</b></h4></ion-item
+        >
+        <ion-item><ion-note>{{country.capital}}</ion-note></ion-item>
+      </ion-list>
+    </ion-card>
+  </div>
+
+  <ion-grid *ngIf="stateFlag">
+    <ion-row>
+      <ion-col
+        *ngFor="let country of dataCountries"
+        size="6"
+        class="animation-opacity"
+        ><ion-card
+          color="light"
+          class="card-flag ion-no-margin"
+          [routerLink]="'/view-country/' + country.ccn3"
+        >
+          <img [src]="country.flag" alt="{{ country.country }} Flag" />
+          <ion-card-header>
+            <ion-card-subtitle color="primary" class="ion-text-center"
+              >{{ country.country }}</ion-card-subtitle
+            >
+          </ion-card-header>
+        </ion-card></ion-col
+      >
+    </ion-row>
+  </ion-grid>
+</ion-content>

@@ -19,7 +19,6 @@ export class Tab1Page implements OnInit {
       if (Array.isArray(res)) {
         this.countries = res.sort(() => Math.random() - 0.5);
         this.loaded = !this.loaded;
-        console.table(this.countries);
       } else {
         console.error('Les données ne sont pas un tableau.');
       }

@@ -11,12 +11,19 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-refresher
+    slot="fixed"
+    (ionRefresh)="handleRefresh($event)"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <ion-card>
     <ion-card-header>
       <ion-card-title class="title-score"
         ><div>Leaderboard</div>
 
-        <ion-button color="light" shape="round" (click)="refreshData()"><ion-icon name="refresh"></ion-icon></ion-button>
+        <!-- <ion-button color="light" shape="round" (click)="refreshData()"><ion-icon name="refresh"></ion-icon></ion-button> -->
       </ion-card-title>
     </ion-card-header>
     <ion-card *ngFor="let partie of parties; let i = index">

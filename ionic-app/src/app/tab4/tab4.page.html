@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>Playground</ion-title>
     <ion-progress-bar
-      *ngIf="loaded"
+      *ngIf="loaded && !showScore"
       [value]="(currentIndex + 1) / questions.length"
     ></ion-progress-bar>
   </ion-toolbar>
@@ -14,6 +14,97 @@
       <ion-title size="large">Playground</ion-title>
     </ion-toolbar>
   </ion-header>
+
+  <ion-refresher
+    *ngIf="!loaded"
+    slot="fixed"
+    (ionRefresh)="handleRefresh($event)"
+  >
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
+  <ion-card *ngIf="loaded && !showScore" class="animation-opacity">
+    <ion-card-header class="title-question">
+      <p><b [innerHTML]="questions[currentIndex].question"></b></p>
+      <ion-note [innerHTML]="questions[currentIndex].category"></ion-note>
+      <br />
+      <ion-card-title color="primary">
+        <b> Question {{ currentIndex+1 + '/' + questions.length }} </b>
+      </ion-card-title>
+    </ion-card-header>
+
+    <ion-card>
+      <ion-card-header>
+        <h3>Your answer</h3>
+      </ion-card-header>
+      <ion-grid>
+        <ion-row>
+          <ion-col
+            size="12"
+            *ngFor="let answer of questions[currentIndex].mergedAnswers"
+            (click)="selectAnswer(questions[currentIndex], answer)"
+            class="answer-card"
+          >
+            <ion-card
+              [color]="selectedAnswer === answer && isAnswered ? 'success' : 'secondary'"
+              class="ion-no-margin"
+            >
+              <ion-card-content
+                ><div [innerHTML]="answer"></div>
+              </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card>
+
+    <ion-card
+      *ngIf="isAnswered && selectedAnswer !== questions[currentIndex].correct_answer"
+      color="danger"
+      class="animation-opacity"
+    >
+      <ion-card-content [innerHTML]="questions[currentIndex].correct_answer">
+      </ion-card-content>
+    </ion-card>
+    <ion-card class="card-no-borders answer-btn" *ngIf="questions.length > 0">
+      <!-- <ion-button
+        shape="round"
+        fill="clear"
+        color="dark"
+        (click)="onPrevious()"
+        *ngIf="currentIndex !== 0"
+      >
+        <ion-icon name="chevron-back" slot="start"></ion-icon>
+        Back
+      </ion-button> -->
+
+      <ion-button
+        shape="round"
+        fill="clear"
+        [disabled]="!isAnswered"
+        color="primary"
+        (click)="onNext()"
+        *ngIf="currentIndex < questions.length - 1"
+      >
+        <ion-icon name="chevron-forward" slot="end"></ion-icon>
+        Next
+      </ion-button>
+
+      <ion-button
+        shape="round"
+        fill="clear"
+        [disabled]="!isAnswered"
+        color="tertiary"
+        (click)="viewScore()"
+        *ngIf="currentIndex === questions.length - 1"
+      >
+        <ion-icon name="chevron-forward" slot="end"></ion-icon>
+        View result
+      </ion-button>
+    </ion-card>
+  </ion-card>
+
+  <!-- skeleton -->
 
   <ion-card *ngIf="!loaded">
     <ion-card class="card-no-borders">
@@ -35,7 +126,7 @@
     </ion-card>
     <ion-card>
       <ion-card-header>
-        <h3>Your answer</h3>
+        <h3>Loading...</h3>
       </ion-card-header>
       <ion-grid>
         <ion-row>
@@ -56,92 +147,40 @@
 
   <!-- skeleton -->
 
-  <ion-card *ngIf="loaded">
-    <ion-card-header class="title-question">
-      <p><b [innerHTML]="questions[currentIndex].question"></b></p>
-      <ion-note [innerHTML]="questions[currentIndex].category"></ion-note>
-      <!-- <ion-card-subtitle
-        ><p>
-          <ion-progress-bar
-          [value]="(currentIndex + 1) / questions.length"
-          ></ion-progress-bar></p
-          ></ion-card-subtitle> -->
-      <br />
-      <ion-card-title color="primary">
-        <b> Question {{ currentIndex+1 + '/' + questions.length }} </b>
-      </ion-card-title>
-    </ion-card-header>
-
-    <ion-card>
-      <ion-card-header>
-        <h3>Your answer</h3>
-      </ion-card-header>
-      <ion-grid>
-        <ion-row>
-          <ion-col
-            size="12"
-            *ngFor="let answer of questions[currentIndex].mergedAnswers"
-          >
-            <ion-card color="secondary" class="ion-no-margin ion-activatable">
-              <ion-ripple-effect></ion-ripple-effect>
-              <ion-card-content
-                ><div [innerHTML]="answer"></div>
-              </ion-card-content>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </ion-card>
-    <ion-card class="card-no-borders answer-btn" *ngIf="questions.length > 0">
-      <ion-button
-        shape="round"
-        fill="clear"
-        color="dark"
-        (click)="onPrevious()"
-        *ngIf="currentIndex !== 0"
-      >
-        <ion-icon name="chevron-back" slot="start"></ion-icon>
-        Back
-      </ion-button>
-
-      <ion-button
-        shape="round"
-        fill="clear"
-        color="primary"
-        (click)="onNext()"
-        *ngIf="currentIndex < questions.length - 1"
-      >
-        <ion-icon name="chevron-forward" slot="end"></ion-icon>
-        Next
-      </ion-button>
-
-      <ion-button
-        shape="round"
-        fill="clear"
-        color="tertiary"
-        *ngIf="currentIndex === questions.length - 1"
-      >
-        <ion-icon name="chevron-forward" slot="end"></ion-icon>
-        View result
-      </ion-button>
-    </ion-card>
-  </ion-card>
-
-  <ion-card class="card-no-borders">
-    <div class="ion-text-right">
+  <ion-card
+    class="card-no-borders animation-opacity"
+    *ngIf="loaded && showScore"
+  >
+    <div>
+      <h2 class="ion-text-center">
+        <ion-text color="tertiary">Your score</ion-text>
+      </h2>
+      <h3 class="ion-text-center score">
+        <ion-text color="tertiary">{{score}}</ion-text>
+      </h3>
+    </div>
+    <div class="save-btn">
       <ion-button
         color="light"
         shape="round"
         (click)="refreshData()"
         id="open-loading"
-        ><ion-icon name="refresh" slot="start"></ion-icon>New
-        Questions</ion-button
+        ><ion-icon name="game-controller" slot="start"></ion-icon
+        >Retry</ion-button
       >
-      <!-- <ion-loading
-        trigger="open-loading"
-        message="Loading new questions..."
-        duration="5000"
-      ></ion-loading> -->
+      <ion-button
+        *ngIf="score !== 0"
+        [disabled]="stateSaveScore"
+        color="secondary"
+        shape="round"
+        (click)="saveScore({pseudo: 'User ' + getRndInteger(1,500), score: score})"
+        id="open-loading"
+        ><ion-icon
+          [name]="stateSaveScore ? 'checkmark-done' : 'save'"
+          slot="start"
+        ></ion-icon
+        >{{ stateSaveScore ? 'Saved' : 'Save score' }}</ion-button
+      >
     </div>
   </ion-card>
 </ion-content>

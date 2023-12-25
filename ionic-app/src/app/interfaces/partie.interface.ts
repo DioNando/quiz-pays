@@ -1,8 +1,8 @@
 export interface PartieInterface {
-  id: number;
+  id?: number;
   pseudo: string;
   score: number;
-  created_at: string;
+  created_at?: string;
   time?: string;
 }
 

@@ -24,6 +24,13 @@ export class Tab3Page implements OnInit {
     });
   }
 
+  handleRefresh(event: any) {
+    setTimeout(() => {
+      this.refreshData();
+      event.target.complete();
+    }, 2000);
+  }
+
   refreshData(): void {
     this.partieService.getData().subscribe((res) => {
       this.parties = res;

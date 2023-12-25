@@ -6,9 +6,73 @@
 
 .answer-btn {
   display: flex;
-  justify-content: space-between;
+  justify-content: end;
+}
+
+.save-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ion-button {
+    margin: 0.75rem;
+  }
 }
 
 .title-question {
   padding-bottom: 0;
+}
+
+.score {
+  font-size: 5rem;
+  font-weight: bolder;
+}
+
+.answer-card {
+  transition: 500ms;
+
+  ion-card {
+    margin: 0.25rem 0.5rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+/* styles.css (ou tout autre fichier CSS de votre choix) */
+
+.animation-opacity {
+  animation: animation-opacity 1s;
+}
+
+@keyframes animation-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes myAnimation {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(0.8);
+  }
+}
+
+.clicked {
+  // animation: myAnimation 2s ease;
+  transform: scale(0.8);
+  background-color: red;
 }

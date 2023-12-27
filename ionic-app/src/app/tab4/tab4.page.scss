@@ -95,3 +95,32 @@
     font-size: 4rem;
   }
  }
+
+ .animation-left {
+  animation: animation-left 1s ease-out;
+}
+
+ .animation-right {
+  animation: animation-right 1s ease-out;
+}
+
+@keyframes animation-left {
+  from {
+    transform: translateX(-5rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+@keyframes animation-right {
+  from {
+    transform: translateX(5rem);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}

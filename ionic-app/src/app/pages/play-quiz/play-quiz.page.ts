@@ -115,7 +115,6 @@ export class PlayQuizPage implements OnInit {
     target.classList.add('clicked');
   }
 
-  //generate random number
   getRndInteger(min: number, max: number): number {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }

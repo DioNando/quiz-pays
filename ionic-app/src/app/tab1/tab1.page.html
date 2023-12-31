@@ -1,6 +1,9 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="primary">
+  <ion-toolbar>
     <ion-title> All Countries </ion-title>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -11,8 +14,7 @@
     </ion-toolbar>
   </ion-header>
 
-
-  <ion-grid>
+  <!-- <ion-grid>
     <ion-row *ngFor="let country of countries" class="ion-align-items-center">
       <ion-col size="auto">
         <ion-avatar [routerLink]="'/view-country/' + country.ccn3">
@@ -28,6 +30,90 @@
         </ion-card>
       </ion-col>
     </ion-row>
-  </ion-grid>
+  </ion-grid> -->
 
+  <ion-card class="card-no-borders">
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-card
+            (click)="showCapital()"
+            color="tertiary"
+            class="ion-activatable ion-no-margin card-play"
+          >
+            <ion-icon name="map" color="secondary"></ion-icon>
+            <div>Name</div>
+          </ion-card>
+        </ion-col>
+        <ion-col size="6">
+          <ion-card
+            (click)="showFlag()"
+            color="tertiary"
+            class="ion-activatable ion-no-margin card-play"
+          >
+            <ion-icon name="flag" color="secondary"></ion-icon>
+            <div>Flags</div>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-card>
+
+  <ion-card *ngIf="!stateCapital && !stateFlag" class="card-no-borders">
+    <ion-card-header class="ion-text-center">
+      <ion-title>Click on to show list</ion-title>
+    </ion-card-header>
+  </ion-card>
+  <div *ngIf="stateCapital">
+    <ion-grid>
+      <ion-row
+        *ngFor="let country of countries"
+        class="ion-align-items-center animation-opacity"
+      >
+        <ion-col size="auto">
+          <ion-avatar [routerLink]="'/view-country/' + country.ccn3">
+            <img
+              [src]="country.flags.svg"
+              alt="{{ country.name.common }} Flag"
+            />
+          </ion-avatar>
+        </ion-col>
+        <ion-col>
+          <ion-card
+            class="ion-no-margin ion-activatable"
+            [routerLink]="'/view-country/' + country.ccn3"
+          >
+            <ion-ripple-effect></ion-ripple-effect>
+            <ion-card-header>
+              <ion-text color="medium">{{ country.capital }}</ion-text>
+              <ion-card-subtitle color="primary"
+                >{{ country.name.common }}</ion-card-subtitle
+              >
+            </ion-card-header>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <ion-grid *ngIf="stateFlag">
+    <ion-row>
+      <ion-col
+        *ngFor="let country of countries"
+        size="6"
+        class="animation-opacity"
+        ><ion-card
+          color="light"
+          class="card-flag ion-no-margin"
+          [routerLink]="'/view-country/' + country.ccn3"
+        >
+          <img [src]="country.flags.svg" alt="{{ country.name.common }} Flag" />
+          <ion-card-header>
+            <ion-card-subtitle color="primary" class="ion-text-center"
+              >{{ country.name.common }}</ion-card-subtitle
+            >
+          </ion-card-header>
+        </ion-card></ion-col
+      >
+    </ion-row>
+  </ion-grid>
 </ion-content>

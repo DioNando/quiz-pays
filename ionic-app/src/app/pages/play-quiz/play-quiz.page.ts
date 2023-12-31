@@ -1,4 +1,5 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { AlertController } from '@ionic/angular';
 import { ActivatedRoute } from '@angular/router';
 import { Platform } from '@ionic/angular';
 import { QuestionService } from '../../services/question.service';
@@ -20,12 +21,13 @@ export class PlayQuizPage implements OnInit {
   score: number = 0;
   showScore: boolean = false;
   isAnswered: boolean = false;
-  stateSaveScore: boolean = false;
+    stateSaveScore: boolean = false;
   selectedAnswer: string = '';
 
   constructor(
     private questionService: QuestionService,
-    private partieService: PartieService
+    private partieService: PartieService,
+    public alertController: AlertController
   ) {}
 
   ngOnInit(): void {
@@ -53,7 +55,7 @@ export class PlayQuizPage implements OnInit {
       this.questions = res;
       this.currentIndex = 0;
       this.isAnswered = false;
-      this.selectedAnswer = '';
+            this.selectedAnswer = '';
       this.score = 0;
       this.showScore = false;
       this.stateSaveScore = false;
@@ -79,16 +81,14 @@ export class PlayQuizPage implements OnInit {
   selectAnswer(question: QuestionInterface, answer: string): void {
     if (!this.isAnswered) {
       this.isAnswered = true;
-      console.log(question);
-      console.log('Your answer: ' + answer);
 
       if (question.correct_answer === answer) {
         this.selectedAnswer = answer;
-        this.score += 10;
+                this.score += 10;
         console.log('Correct');
       } else {
         this.selectedAnswer = '';
-        console.log('Incorrect');
+                console.log('Incorrect');
       }
     }
   }
@@ -110,9 +110,15 @@ export class PlayQuizPage implements OnInit {
     );
   }
 
-  animateOnClick(event: MouseEvent): void {
-    const target = event.target as HTMLElement;
-    target.classList.add('clicked');
+  isClicked = false;
+
+  animateOnClick(question: QuestionInterface, answer: string): void {
+    this.isClicked = true;
+    if (question.correct_answer == answer) {
+      console.log('Correct');
+    } else {
+      console.log('Incorrect');
+    }
   }
 
   getRndInteger(min: number, max: number): number {
@@ -122,5 +128,35 @@ export class PlayQuizPage implements OnInit {
   getBackButtonText() {
     const isIos = this.platform.is('ios');
     return isIos ? 'Exit' : '';
+  }
+
+  async afficherAlerteAvecInput() {
+    const alert = await this.alertController.create({
+      header: 'Enter your pseudo',
+      inputs: [
+        {
+          name: 'pseudo',
+          type: 'text',
+          placeholder: 'Pseudo'
+        }
+      ],
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          handler: () => {
+            console.log('Annulé');
+          }
+        },
+        {
+          text: 'Save score',
+          handler: (data) => {
+            this.saveScore({pseudo: data.pseudo + ' ' + this.getRndInteger(1,1500), score: this.score})
+          }
+        }
+      ]
+
+    })
+    await alert.present();
   }
 }

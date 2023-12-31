@@ -8,7 +8,8 @@ import { QuestionInterface } from '../interfaces/question.interface';
   providedIn: 'root',
 })
 export class QuestionService {
-  private apiUrl = 'https://opentdb.com/api.php?amount=5';
+  // private apiUrl = 'https://opentdb.com/api.php?amount=10';
+  private apiUrl = 'https://opentdb.com/api.php?amount=15&difficulty=easy';
 
   private apiNumber: number = 10;
   private apiCategory: string = '';
@@ -59,4 +60,6 @@ export class QuestionService {
 
     return array;
   }
+
+
 }

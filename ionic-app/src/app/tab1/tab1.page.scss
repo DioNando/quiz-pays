@@ -1,0 +1,40 @@
+.card-play {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  font-weight: bold;
+  font-size: 1rem;
+  box-shadow: none;
+
+
+  ion-icon:first-child {
+    font-size: 2rem;
+  }
+ }
+
+ .card-no-borders {
+  background: none;
+  border: none;
+  box-shadow: none;
+}
+
+.animation-opacity {
+  animation: animation-opacity 1s;
+}
+
+@keyframes animation-opacity {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.card-flag {
+  border-radius: 0;
+  padding: .5rem;
+
+}

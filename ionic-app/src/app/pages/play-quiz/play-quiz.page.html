@@ -72,6 +72,15 @@
       <ion-card-content [innerHTML]="questions[currentIndex].correct_answer">
       </ion-card-content>
     </ion-card>
+    <!-- <ion-toast
+      position="top"
+      icon="sad"
+      [isOpen]="isAnswered && selectedAnswer !== questions[currentIndex].correct_answer"
+      [message]="questions[currentIndex].correct_answer"
+      [duration]="5000"
+    >
+    </ion-toast> -->
+
     <ion-card class="card-no-borders answer-btn" *ngIf="questions.length > 0">
       <!-- <ion-button
         shape="round"
@@ -86,9 +95,9 @@
 
       <ion-button
         shape="round"
-        fill="clear"
+        [fill]="isAnswered ? 'solid' : 'clear'"
         [disabled]="!isAnswered"
-        color="primary"
+        [color]="selectedAnswer === questions[currentIndex].correct_answer && isAnswered ? 'success' : 'medium'"
         (click)="onNext()"
         *ngIf="currentIndex < questions.length - 1"
       >
@@ -98,7 +107,7 @@
 
       <ion-button
         shape="round"
-        fill="clear"
+        fill="solid"
         [disabled]="!isAnswered"
         color="tertiary"
         (click)="viewScore()"
@@ -179,7 +188,7 @@
         [disabled]="stateSaveScore"
         color="secondary"
         shape="round"
-        (click)="saveScore({pseudo: 'User ' + getRndInteger(1,1500), score: score})"
+        (click)="afficherAlerteAvecInput()"
         id="open-loading"
         ><ion-icon
           [name]="stateSaveScore ? 'checkmark-done' : 'save'"

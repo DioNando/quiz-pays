@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CountryService } from '../services/country.service';
 import { CountryInterface } from '../interfaces/country.interface';
-import { map } from 'rxjs';
 
 @Component({
   selector: 'app-tab1',
@@ -11,6 +10,8 @@ import { map } from 'rxjs';
 export class Tab1Page implements OnInit {
   countries: CountryInterface[] = [];
   public loaded = false;
+  stateCapital:boolean = false;
+  stateFlag:boolean = false;
 
   constructor(private countryService: CountryService) {}
 
@@ -23,5 +24,14 @@ export class Tab1Page implements OnInit {
         console.error('Les données ne sont pas un tableau.');
       }
     });
+  }
+
+  showCapital(): void {
+    this.stateCapital = true;
+    this.stateFlag = false;
+  }
+  showFlag(): void {
+    this.stateFlag = true;
+    this.stateCapital = false;
   }
 }

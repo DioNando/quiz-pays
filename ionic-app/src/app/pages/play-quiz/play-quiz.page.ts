@@ -151,7 +151,7 @@ export class PlayQuizPage implements OnInit {
         {
           text: 'Save score',
           handler: (data) => {
-            this.saveScore({pseudo: data.pseudo + ' ' + this.getRndInteger(1,1500), score: this.score})
+            this.saveScore({pseudo: data.pseudo.trim() + ' ' + this.getRndInteger(1,1500), score: this.score})
           }
         }
       ]

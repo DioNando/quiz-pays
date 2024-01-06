@@ -63,7 +63,8 @@
 }
 
 .animation-shake {
-  animation: animation-shake 1s cubic-bezier(1, 0.610, 0.355, 1) alternate infinite;
+  animation: animation-shake 1s cubic-bezier(1, 0.61, 0.355, 1) alternate
+    infinite;
 }
 
 @keyframes animation-shake {
@@ -90,17 +91,16 @@
   font-weight: bold;
   font-size: 1.5rem;
 
-
   ion-icon:first-child {
     font-size: 4rem;
   }
- }
+}
 
- .animation-left {
+.animation-left {
   animation: animation-left 1s ease-out;
 }
 
- .animation-right {
+.animation-right {
   animation: animation-right 1s ease-out;
 }
 
@@ -123,4 +123,30 @@
     transform: translateX(0);
     opacity: 1;
   }
+}
+
+.country-choice {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  gap: 1rem;
+
+  div {
+    flex: 1;
+  }
+
+  .card-play {
+    margin: 0;
+    font-weight: bold;
+    font-size: 1rem;
+
+    ion-icon:first-child {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+  }
+}
+
+.card-choice {
+  padding: 0;
 }

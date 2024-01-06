@@ -18,4 +18,5 @@ export class CountryService {
   getDataCountry(id:string): Observable<CountryInterface[]> {
     return this.http.get<CountryInterface[]>(this.apiUrl + 'alpha/' + id);
   }
+
 }

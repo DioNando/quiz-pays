@@ -9,6 +9,7 @@ import { CountryInterface } from '../interfaces/country.interface';
 })
 export class Tab1Page implements OnInit {
   countries: CountryInterface[] = [];
+  filteredCountries: CountryInterface[] = [];
   public loaded = false;
   stateCapital:boolean = false;
   stateFlag:boolean = false;
@@ -19,6 +20,7 @@ export class Tab1Page implements OnInit {
     this.countryService.getData().subscribe((res) => {
       if (Array.isArray(res)) {
         this.countries = res.sort(() => Math.random() - 0.5);
+        this.filteredCountries = [...this.countries];
         this.loaded = !this.loaded;
       } else {
         console.error('Les données ne sont pas un tableau.');
@@ -33,5 +35,12 @@ export class Tab1Page implements OnInit {
   showFlag(): void {
     this.stateFlag = true;
     this.stateCapital = false;
+  }
+
+  searchCountries(event: any): void {
+    const searchTerm = event.target.value.toLowerCase();
+    this.filteredCountries = this.countries.filter(country =>
+      country.name.common.toLowerCase().includes(searchTerm)
+    );
   }
 }

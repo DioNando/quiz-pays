@@ -13,8 +13,9 @@ const routes: Routes = [
   {
     path: 'play-quiz',
     loadChildren: () => import('./pages/play-quiz/play-quiz.module').then( m => m.PlayQuizPageModule)
-  },  {
-    path: 'play-country',
+  },
+  {
+    path: 'play-country/:number',
     loadChildren: () => import('./pages/play-country/play-country.module').then( m => m.PlayCountryPageModule)
   },
 

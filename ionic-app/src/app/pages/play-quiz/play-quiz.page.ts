@@ -21,7 +21,7 @@ export class PlayQuizPage implements OnInit {
   score: number = 0;
   showScore: boolean = false;
   isAnswered: boolean = false;
-    stateSaveScore: boolean = false;
+  stateSaveScore: boolean = false;
   selectedAnswer: string = '';
 
   constructor(
@@ -55,7 +55,7 @@ export class PlayQuizPage implements OnInit {
       this.questions = res;
       this.currentIndex = 0;
       this.isAnswered = false;
-            this.selectedAnswer = '';
+      this.selectedAnswer = '';
       this.score = 0;
       this.showScore = false;
       this.stateSaveScore = false;
@@ -84,11 +84,11 @@ export class PlayQuizPage implements OnInit {
 
       if (question.correct_answer === answer) {
         this.selectedAnswer = answer;
-                this.score += 10;
+        this.score += 10;
         console.log('Correct');
       } else {
         this.selectedAnswer = '';
-                console.log('Incorrect');
+        console.log('Incorrect');
       }
     }
   }
@@ -137,8 +137,8 @@ export class PlayQuizPage implements OnInit {
         {
           name: 'pseudo',
           type: 'text',
-          placeholder: 'Pseudo'
-        }
+          placeholder: 'Pseudo',
+        },
       ],
       buttons: [
         {
@@ -146,17 +146,19 @@ export class PlayQuizPage implements OnInit {
           role: 'cancel',
           handler: () => {
             console.log('Annulé');
-          }
+          },
         },
         {
           text: 'Save score',
           handler: (data) => {
-            this.saveScore({pseudo: data.pseudo.trim() + ' ' + this.getRndInteger(1,1500), score: this.score})
-          }
-        }
-      ]
-
-    })
+            this.saveScore({
+              pseudo: data.pseudo.trim(),
+              score: this.score,
+            });
+          },
+        },
+      ],
+    });
     await alert.present();
   }
 }

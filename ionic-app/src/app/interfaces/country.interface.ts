@@ -12,6 +12,17 @@ export interface CountryInterface {
   maps: Maps;
 }
 
+export interface CountryQuestionInterface {
+  name: Name;
+  cca2: string;
+  ccn3: string;
+  cca3: string;
+  capital: string;
+  flag: string;
+  mergedAnswers: MergedAnswers;
+  type?: number;
+}
+
 interface Name {
   common: string;
   official: string;
@@ -25,6 +36,11 @@ interface Flags {
 interface Maps {
   googleMaps: string;
   openStreetMaps: string;
+}
+
+interface MergedAnswers {
+  capitals: string[];
+  flags: string[];
 }
 
 export const exampleCountry: CountryInterface = {

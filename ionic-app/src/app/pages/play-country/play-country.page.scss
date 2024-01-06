@@ -34,7 +34,71 @@
 }
 
 .card-flag {
-  border-radius: 0;
+  margin: .5rem;
+}
+
+.card-flag-sub {
+  position: relative;
+  height: 5rem;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: .5rem;
 
+  img {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+
+}
+
+.answer-btn {
+  display: flex;
+  justify-content: end;
+}
+
+.question-label {
+  font-size: large;
+  font-weight: bold;
+}
+
+.answer-card {
+  // transition: 500ms;
+
+  ion-card {
+    margin: 0.25rem 0.5rem;
+
+    &:first-child {
+      margin-top: 0;
+    }
+    &:last-child {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+}
+
+.save-btn {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ion-button {
+    margin: 0.75rem;
+  }
+}
+
+.title-question {
+  padding-bottom: 0;
+}
+
+.score {
+  font-size: 5rem;
+  font-weight: bolder;
 }

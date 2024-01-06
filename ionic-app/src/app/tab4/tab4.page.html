@@ -12,20 +12,53 @@
   </ion-header>
   <div [routerLink]="'/play-quiz'">
     <ion-card color="secondary" class="ion-activatable card-play">
-      <ion-icon name="game-controller" color="tertiary" class="animation-left"></ion-icon>
+      <ion-icon
+        name="game-controller"
+        color="tertiary"
+        class="animation-left"
+      ></ion-icon>
       <div>Quiz game</div>
     </ion-card>
   </div>
-  <div [routerLink]="'/play-country'">
+  <div (click)="showOption()">
     <ion-card color="secondary" class="ion-activatable card-play">
-      <ion-icon name="earth" color="tertiary" class="animation-right"></ion-icon>
+      <ion-icon *ngIf="!isOptionShow"
+        name="earth"
+        color="tertiary"
+        class="animation-right"
+      ></ion-icon>
       <div>Countries</div>
     </ion-card>
   </div>
-  <!-- <div [routerLink]="'/tabs/tab2'">
-    <ion-card color="secondary" class="ion-activatable card-play">
-      <ion-icon name="happy" color="tertiary" class="animation-shake"></ion-icon>
-      <div>Emojis</div>
-    </ion-card>
-  </div> -->
+  <ion-card class="card-no-borders card-choice" *ngIf="isOptionShow">
+    <div class="country-choice">
+      <div [routerLink]="'/play-country/10'" class="animation-opacity">
+        <ion-card color="tertiary" class="ion-activatable card-play">
+          <ion-icon
+            name="flag"
+            class="animation-shake"
+          ></ion-icon>
+          <div>10</div>
+        </ion-card>
+      </div>
+      <div [routerLink]="'/play-country/25'" class="animation-opacity">
+        <ion-card color="tertiary" class="ion-activatable card-play">
+          <ion-icon
+            name="skull"
+            class="animation-shake"
+          ></ion-icon>
+          <div>25</div>
+        </ion-card>
+      </div>
+      <div [routerLink]="generateRouterLink()" class="animation-opacity">
+        <ion-card color="tertiary" class="ion-activatable card-play">
+          <ion-icon
+            name="dice"
+            class="animation-shake"
+          ></ion-icon>
+          <div>Random</div>
+        </ion-card>
+      </div>
+    </div>
+  </ion-card>
 </ion-content>

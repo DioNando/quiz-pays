@@ -3,7 +3,7 @@
     <ion-title> All Countries </ion-title>
   </ion-toolbar>
   <ion-toolbar>
-    <ion-searchbar></ion-searchbar>
+    <ion-searchbar (ionInput)="searchCountries($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
@@ -13,24 +13,6 @@
       <ion-title size="large">All Countries</ion-title>
     </ion-toolbar>
   </ion-header>
-
-  <!-- <ion-grid>
-    <ion-row *ngFor="let country of countries" class="ion-align-items-center">
-      <ion-col size="auto">
-        <ion-avatar [routerLink]="'/view-country/' + country.ccn3">
-          <img [src]="country.flags.svg" alt="{{ country.name.common }} Flag" />
-        </ion-avatar>
-      </ion-col>
-      <ion-col>
-        <ion-card class="ion-no-margin ion-activatable" [routerLink]="'/view-country/' + country.ccn3">
-          <ion-ripple-effect></ion-ripple-effect>
-          <ion-card-header>
-            <ion-card-subtitle color="primary">{{ country.name.common }}</ion-card-subtitle>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-  </ion-grid> -->
 
   <ion-card class="card-no-borders">
     <ion-grid>
@@ -67,7 +49,7 @@
   <div *ngIf="stateCapital">
     <ion-grid>
       <ion-row
-        *ngFor="let country of countries"
+        *ngFor="let country of filteredCountries"
         class="ion-align-items-center animation-opacity"
       >
         <ion-col size="auto">
@@ -98,7 +80,7 @@
   <ion-grid *ngIf="stateFlag">
     <ion-row>
       <ion-col
-        *ngFor="let country of countries"
+        *ngFor="let country of filteredCountries"
         size="6"
         class="animation-opacity"
         ><ion-card

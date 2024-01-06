@@ -7,6 +7,10 @@
       ></ion-back-button>
     </ion-buttons>
     <ion-title>Countries</ion-title>
+    <ion-progress-bar
+      *ngIf="loaded && !showScore"
+      [value]="(currentIndex + 1) / questionCountries.length"
+    ></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
 
@@ -17,6 +21,151 @@
     </ion-toolbar>
   </ion-header>
 
+  <ion-card *ngIf="loaded && !showScore">
+    <ion-grid *ngIf="questionCountries[currentIndex].type === 1">
+      <ion-card>
+        <ion-card-header>
+          <ion-text class="question-label"
+            >Flag of {{ questionCountries[currentIndex].name.common }} is
+            :</ion-text
+          >
+          <ion-card-subtitle>
+            Question {{ currentIndex+1 + '/' + questionCountries.length }}
+          </ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+      <ion-row style="padding: 0.25rem">
+        <ion-col
+          *ngFor="let flag of questionCountries[currentIndex].mergedAnswers.flags"
+          size="6"
+          class="answer-card animation-opacity"
+          (click)="selectAnswer(questionCountries[currentIndex], flag)"
+        >
+          <ion-card class="card-flag"
+            ><div color="light" class="card-flag-sub">
+              <img [src]="flag" alt="Flag" /></div
+          ></ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="questionCountries[currentIndex].type === 2">
+      <ion-card>
+        <ion-card-header>
+          <ion-text class="question-label"
+            >What is the capital of {{
+            questionCountries[currentIndex].name.common }} ?</ion-text
+          >
+          <ion-card-subtitle>
+            Question {{ currentIndex+1 + '/' + questionCountries.length }}
+          </ion-card-subtitle>
+        </ion-card-header>
+      </ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col
+            size="12"
+            *ngFor="let capital of questionCountries[currentIndex].mergedAnswers.capitals"
+            (click)="selectAnswer(questionCountries[currentIndex], capital)"
+            class="answer-card animation-opacity"
+          >
+            <ion-card
+              [color]="selectedAnswer === capital && isAnswered ? 'success' : 'secondary'"
+              class="ion-no-margin"
+            >
+              <ion-card-content><div>{{ capital }}</div> </ion-card-content>
+            </ion-card>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-grid>
+
+    <ion-card
+      *ngIf="isAnswered && (selectedAnswer !== questionCountries[currentIndex].flag && selectedAnswer !== questionCountries[currentIndex].capital)"
+      color="danger"
+      class="animation-opacity"
+    >
+      <!-- <ion-card-content [innerHTML]="questions[currentIndex].correct_answer"> -->
+      <ion-card-content>
+        False
+      </ion-card-content>
+    </ion-card>
 
 
+    <ion-card
+      class="card-no-borders answer-btn"
+      *ngIf="questionCountries.length > 0"
+    >
+      <!-- <ion-button
+        shape="round"
+        fill="clear"
+        color="dark"
+        (click)="onPrevious()"
+        *ngIf="currentIndex !== 0"
+      >
+        <ion-icon name="chevron-back" slot="start"></ion-icon>
+        Back
+      </ion-button> -->
+
+      <ion-button
+        shape="round"
+        [fill]="isAnswered ? 'solid' : 'clear'"
+        [disabled]="!isAnswered"
+        [color]="(selectedAnswer === questionCountries[currentIndex].flag || selectedAnswer === questionCountries[currentIndex].capital) && isAnswered ? 'success' : 'medium'"
+        (click)="onNext()"
+        *ngIf="currentIndex < questionCountries.length - 1"
+      >
+        <ion-icon name="chevron-forward" slot="end"></ion-icon>
+        Next
+      </ion-button>
+
+      <ion-button
+        shape="round"
+        fill="solid"
+        [disabled]="!isAnswered"
+        color="tertiary"
+        (click)="viewScore()"
+        *ngIf="currentIndex === questionCountries.length - 1"
+      >
+        <ion-icon name="chevron-forward" slot="end"></ion-icon>
+        View result
+      </ion-button>
+    </ion-card>
+  </ion-card>
+
+  <ion-card
+    class="card-no-borders animation-opacity"
+    *ngIf="loaded && showScore"
+  >
+    <div>
+      <h2 class="ion-text-center">
+        <ion-text>Your score</ion-text>
+      </h2>
+      <h3 class="ion-text-center score">
+        <ion-text>{{score}}</ion-text>
+      </h3>
+    </div>
+    <div class="save-btn">
+      <ion-button
+        color="light"
+        shape="round"
+        (click)="refreshData()"
+        id="open-loading"
+        ><ion-icon name="game-controller" slot="start"></ion-icon
+        >Retry</ion-button
+      >
+      <ion-button
+        *ngIf="score !== 0"
+        [disabled]="stateSaveScore"
+        color="secondary"
+        shape="round"
+        (click)="afficherAlerteAvecInput()"
+        id="open-loading"
+        ><ion-icon
+          [name]="stateSaveScore ? 'checkmark-done' : 'save'"
+          slot="start"
+        ></ion-icon
+        >{{ stateSaveScore ? 'Saved' : 'Save score' }}</ion-button
+      >
+    </div>
+  </ion-card>
 </ion-content>

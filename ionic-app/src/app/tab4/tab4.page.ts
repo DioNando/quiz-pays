@@ -7,6 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class Tab4Page implements OnInit {
   isOptionShow: boolean = false;
+  isOptionQuizShow: boolean = false;
 
   constructor() {}
 
@@ -16,8 +17,10 @@ export class Tab4Page implements OnInit {
   }
 
   showOption(): boolean {
-    console.log(this.isOptionShow);
     return this.isOptionShow ? this.isOptionShow = false : this.isOptionShow = true;
+  }
+  showQuizOption(): boolean {
+    return this.isOptionQuizShow ? this.isOptionQuizShow = false : this.isOptionQuizShow = true;
   }
 
   generateRandomNumber(): number {

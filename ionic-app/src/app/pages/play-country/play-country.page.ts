@@ -38,10 +38,10 @@ export class PlayCountryPage implements OnInit {
 
   ngOnInit(): void {
     this.countryService.getData().subscribe((res) => {
-      const numberOfQuestion = this.activatedRoute.snapshot.paramMap.get('number') as string;
+      const numberOfQuestions = this.activatedRoute.snapshot.paramMap.get('number') as string;
       if (Array.isArray(res)) {
         this.countries = res;
-        this.questionCountries = this.randomCountries(this.countries, parseInt(numberOfQuestion));
+        this.questionCountries = this.randomCountries(this.countries, parseInt(numberOfQuestions));
         console.table(this.questionCountries);
         this.loaded = !this.loaded;
       } else {

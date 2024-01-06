@@ -10,9 +10,9 @@
       <ion-title size="large">Playground</ion-title>
     </ion-toolbar>
   </ion-header>
-  <div [routerLink]="'/play-quiz'">
-    <ion-card color="secondary" class="ion-activatable card-play">
-      <ion-icon
+  <div  (click)="showQuizOption()">
+    <ion-card [color]="isOptionQuizShow ? '' : 'secondary'" class="ion-activatable card-play">
+      <ion-icon *ngIf="!isOptionQuizShow"
         name="game-controller"
         color="tertiary"
         class="animation-left"
@@ -20,8 +20,30 @@
       <div>Quiz game</div>
     </ion-card>
   </div>
+  <ion-card class="card-no-borders card-choice" *ngIf="isOptionQuizShow">
+    <div class="country-choice">
+      <div [routerLink]="'/play-quiz/15'" class="animation-opacity">
+        <ion-card color="tertiary" class="ion-activatable card-play">
+          <ion-icon
+            name="pizza"
+            class="animation-shake"
+          ></ion-icon>
+          <div>15</div>
+        </ion-card>
+      </div>
+      <div [routerLink]="'/play-quiz/30'" class="animation-opacity">
+        <ion-card color="tertiary" class="ion-activatable card-play">
+          <ion-icon
+            name="flame"
+            class="animation-shake"
+          ></ion-icon>
+          <div>30</div>
+        </ion-card>
+      </div>
+    </div>
+  </ion-card>
   <div (click)="showOption()">
-    <ion-card color="secondary" class="ion-activatable card-play">
+    <ion-card [color]="isOptionQuizShow ? '' : 'secondary'" class="ion-activatable card-play">
       <ion-icon *ngIf="!isOptionShow"
         name="earth"
         color="tertiary"
@@ -61,4 +83,6 @@
       </div>
     </div>
   </ion-card>
+
+
 </ion-content>

@@ -31,7 +31,8 @@ export class PlayQuizPage implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.questionService.getData().subscribe((res) => {
+    const numberOfQuestions = this.activatedRoute.snapshot.paramMap.get('number') as string;
+    this.questionService.getData(parseInt(numberOfQuestions)).subscribe((res) => {
       if (res) {
         this.questions = res;
         this.showScore = false;
@@ -50,8 +51,9 @@ export class PlayQuizPage implements OnInit {
   }
 
   refreshData(): void {
+    const numberOfQuestions = this.activatedRoute.snapshot.paramMap.get('number') as string;
     this.loaded = false;
-    this.questionService.getData().subscribe((res) => {
+    this.questionService.getData(parseInt(numberOfQuestions)).subscribe((res) => {
       this.questions = res;
       this.currentIndex = 0;
       this.isAnswered = false;

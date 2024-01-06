@@ -8,8 +8,8 @@ import { QuestionInterface } from '../interfaces/question.interface';
   providedIn: 'root',
 })
 export class QuestionService {
-  // private apiUrl = 'https://opentdb.com/api.php?amount=10';
-  private apiUrl = 'https://opentdb.com/api.php?amount=15&difficulty=easy';
+  private apiUrl = 'https://opentdb.com/api.php?amount=';
+  // private apiUrl = 'https://opentdb.com/api.php?amount=15&difficulty=easy';
 
   private apiNumber: number = 10;
   private apiCategory: string = '';
@@ -18,8 +18,8 @@ export class QuestionService {
 
   constructor(private http: HttpClient) {}
 
-  getData(): Observable<any> {
-    return this.http.get<any>(this.apiUrl).pipe(
+  getData(numberOfQuestions: number): Observable<any> {
+    return this.http.get<any>(this.apiUrl + numberOfQuestions).pipe(
       delay(5000),
       map((response) => {
         if (response.results) {

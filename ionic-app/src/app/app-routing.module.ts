@@ -11,7 +11,7 @@ const routes: Routes = [
     loadChildren: () => import('./pages/view-country/view-country.module').then( m => m.ViewCountryPageModule)
   },
   {
-    path: 'play-quiz',
+    path: 'play-quiz/:number',
     loadChildren: () => import('./pages/play-quiz/play-quiz.module').then( m => m.PlayQuizPageModule)
   },
   {

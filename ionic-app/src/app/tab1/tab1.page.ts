@@ -22,6 +22,7 @@ export class Tab1Page implements OnInit {
         this.countries = res.sort(() => Math.random() - 0.5);
         this.filteredCountries = [...this.countries];
         this.loaded = !this.loaded;
+        this.stateCapital = true;
       } else {
         console.error('Les données ne sont pas un tableau.');
       }
